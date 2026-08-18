@@ -72,6 +72,13 @@ pytest -q
 The reference result explicitly labels itself a mathematical/orchestration smoke test. It is not evidence for
 quality, distributed correctness, throughput, mixed precision, or CUDA-kernel compatibility.
 
+Plans for every backend can also be generated and inspected without installing an NVIDIA package:
+
+```bash
+llm-lifecycle demo --backend automodel --output runs/automodel-plan
+llm-lifecycle demo --backend megatron_bridge --output runs/bridge-plan
+```
+
 ## NeMo AutoModel
 
 ```python
