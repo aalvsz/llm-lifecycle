@@ -23,6 +23,7 @@ jobs:
         with:
           python-version: "3.11"
           enable-cache: true
+          cache-suffix: quality
       - run: uv sync --extra dev
       - run: uv run ruff check src tests examples
       - run: uv run mypy src
@@ -40,6 +41,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
+          cache-suffix: core-${{ matrix.python-version }}
       - run: uv sync --extra dev
       - run: uv run pytest -q
       - run: uv run python -m compileall -q src tests examples
@@ -53,6 +55,7 @@ jobs:
         with:
           python-version: "3.11"
           enable-cache: true
+          cache-suffix: reference-cpu
       - run: uv venv --python 3.11
       - name: Install CPU-only PyTorch
         run: uv pip install torch --index-url https://download.pytorch.org/whl/cpu
@@ -71,6 +74,7 @@ jobs:
         with:
           python-version: "3.11"
           enable-cache: true
+          cache-suffix: build
       - run: uv build
       - run: uvx twine check dist/*
       - uses: actions/upload-artifact@v7
