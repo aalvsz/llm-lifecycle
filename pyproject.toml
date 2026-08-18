@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-lifecycle"
+version = "0.1.0"
+description = "An Ultralytics-style lifecycle API for tiny CPU tests, NeMo AutoModel, and Megatron Bridge."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{ name = "LLM Lifecycle contributors" }]
+dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://github.com/aalvsz/llm-lifecycle"
+Documentation = "https://github.com/aalvsz/llm-lifecycle#readme"
+Issues = "https://github.com/aalvsz/llm-lifecycle/issues"
+Source = "https://github.com/aalvsz/llm-lifecycle"
+
+[project.optional-dependencies]
+reference = ["torch>=2.3"]
+inference = ["torch>=2.3", "transformers>=4.51"]
+dev = [
+  "mypy>=1.15",
+  "pytest>=8.0",
+  "ruff>=0.11",
+]
+
+[project.scripts]
+llm-lifecycle = "llm_lifecycle.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_lifecycle"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["llm_lifecycle"]
